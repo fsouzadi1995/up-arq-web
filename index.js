@@ -88,9 +88,9 @@ app.delete('/api/currency/:currencyId', async (req, res) => {
   }
 });
 
-app.post('/api/buy_currency/:currencyId', async (req, res) => {
+app.post('/api/user/:userId/buy_currency/:currencyId', async (req, res) => {
   const { amount } = req.body;
-  const userId = +req.body.userId;
+  const userId = +req.params.userId;
   const currencyId = +req.params.currencyId;
 
   try {
