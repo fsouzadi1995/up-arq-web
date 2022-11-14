@@ -10,20 +10,46 @@ Sistema bancario estilo Lemon que permite el intercambio de monedas y el envío 
 
 ## Endpoints
 
-1. `/api/v1/buy_currency/:currencyId`
+1. `/api/currency`
+
+Method: GET
+Desc: Devuelve la lista de currencies
+Error code: 500?
+
+2. `/api/currency/:currencyId`
+
+Method: GET
+Desc: Devuelve una currency en particular
+Error code: 404 si no existe un recurso con ese id
+
+3. `/api/currency`
+
+Method: POST
+Desc: Crea una nueva currency
+Error code: 400 si no recibe el formato esperado
+
+4. `/api/currency/:currencyId`
+
+Method: PATCH
+Desc: Modifica el/los campos de la currency especificada
+Error code: 400 si no recibe el formato esperado, 404 si no existe la currencyId
+
+5. `/api/currency/:currencyId`
+
+Method: DELETE
+Desc: Elimina la currency especificada
+Error code: 404 si no existe la currencyId
+
+---
+
+6. `/api/user/:userId/buy_currency/:currencyId`
 
 Method: POST
 Desc: Utiliza $ARS para comprar o cambiar por otro tipo de currency
-Error code: 403 si el usuario no tiene los fondos suficientes para realizar la compra
+Error code: 403 si el usuario no tiene los fondos suficientes para realizar la compra, 400 si alguno de los ids es inválido
 
-2. `/api/v1/currencies`
-
-Method: GET
-Desc: Devuelve la lista de currencies del usuario junto con su cantidad correspondiente
-Error code: 401 si no el jwt no corresponde a un usuario válido o expiró
-
-3. `/api/v1/transfer/:currencyId/from/:userId/to/:userId`
+7. `/api/transfer/:currencyId/from/:userId/to/:userId`
 
 Method: POST
 Desc: Transfiere una currency en particular a un usuario determinado.
-Error code: 403 si el usuario no tiene los fondos para realizar una transferencia con ese monto
+Error code: 403 si el usuario no tiene los fondos para realizar una transferencia con ese monto, 404 si alguno de los ids no existe, 400 si los userId son idénticos
