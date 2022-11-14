@@ -20,7 +20,7 @@ Error code: 500?
 
 Method: GET
 Desc: Devuelve una currency en particular
-Error code: 404 si no existe un recurso con ese id
+Error code: 404 si no existe un recurso con ese id o 400 si la currencyId no es válida
 
 3. `/api/currency`
 

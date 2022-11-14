@@ -15,8 +15,12 @@ app.get('/api/currency', async (req, res) => {
 });
 
 app.get('/api/currency/:currencyId', async (req, res) => {
-  const { currencyId } = req.params;
+  const currencyId = +req.params.currencyId;
   try {
+    if (isNan(currencyId)) {
+      return res.status(400).send();
+    }
+
     const resource = await prismaClient.currency.findFirst({
       where: { id: +currencyId },
     });
@@ -25,7 +29,7 @@ app.get('/api/currency/:currencyId', async (req, res) => {
       res.status(404).send();
     }
 
-    res.status(200).json(resource);
+    res.status(200).send(resource);
   } catch (err) {
     res.status(500).send();
   }
